@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='myystyle.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="/dashboard">Home</a>
+    <a href="/contact">Contact</a>
+    <a href="/employees">Employee Details</a>
+    <a href="/create_employee">Create Employee</a>
+    <a href="/about">About SRMCEM</a>
+    <a href="/logout">Logout</a>
+  </nav>
+
+  <div class="content">
+    <h2>Welcome, {{ user }}</h2>
+    <p>This is your dashboard home page.</p>
+
+    <div class="about">
+      <h3>About SRMCEM Student Portal</h3>
+      <p>
+        The SRMCEM Student Portal provides an easy way for students to access their 
+        academic information, stay updated with announcements, and manage their profiles.  
+        Students can view course details, contact faculty, check results, and explore 
+        campus activities all in one place.  
+        This portal is designed to make learning and communication simple and effective.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employees</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="/dashboard">Home</a>
+    <a href="/create_employee">Create Employee</a>
+    <a href="/logout">Logout</a>
+  </nav>
+
+  <h2 style="color:aliceblue; ">Employee List</h2>
+  <table>
+    <tr><th>ID</th><th>Name</th><th>Position</th><th>Email</th></tr>
+    {% for emp in employees %}
+      <tr>
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.position }}</td>
+        <td>{{ emp.email }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

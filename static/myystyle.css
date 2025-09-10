@@ -1,0 +1,65 @@
+/* Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1") no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+}
+
+/* Navbar */
+nav {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px;
+  text-align: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+/* Content */
+.content {
+  text-align: center;
+  margin-top: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 12px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Heading */
+.content h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+/* About section */
+.about {
+  margin-top: 25px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about h3 {
+  color: #ffd700;
+}
+
+.about p {
+  font-size: 16px;
+  line-height: 1.6;
+}
