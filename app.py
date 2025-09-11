@@ -1,27 +1,40 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-import mysql.connector as p
-from mysql.connector import Error
+import psycopg2
+from psycopg2 import Error
 import os
 
 app = Flask(__name__)
 app.secret_key = "miniportal123"
 
 # --- DB Configuration ---
-db_config = {
-    'host': os.environ.get('MYSQL_HOST', 'localhost'),
-    'user': os.environ.get('MYSQL_USER', 'root'),
-    'password': os.environ.get('MYSQL_PASSWORD', '2607'),
-    'database': os.environ.get('MYSQL_DATABASE', 'mini_project')
-}
+def get_db_config():
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url:
+        # Production (Render) - PostgreSQL
+        return database_url
+    else:
+        # Local development config (MySQL)
+        return {
+            'host': 'localhost',
+            'user': 'root',
+            'password': '2607',
+            'database': 'mini_project'
+        }
 
 # --- DB Connection ---
 def get_db_connection():
     try:
-        connection = p.connect(**db_config)
-        if connection.is_connected():
-            return connection
+        db_config = get_db_config()
+        if isinstance(db_config, str):
+            # Production (Render) - PostgreSQL
+            connection = psycopg2.connect(db_config)
+        else:
+            # Local development - MySQL (you'll need to install mysql-connector-python locally)
+            import mysql.connector as p
+            connection = p.connect(**db_config)
+        return connection
     except Error as e:
-        print(f"Error connecting to MySql: {e}")
+        print(f"Error connecting to database: {e}")
         return None
 
 # --- Signup ---
@@ -54,7 +67,7 @@ def login():
         password = request.form['password']
 
         conn = get_db_connection()
-        cur = conn.cursor(dictionary=True)
+        cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE username=%s AND password=%s", (username, password))
         user = cur.fetchone()
         cur.close()
@@ -88,7 +101,7 @@ def contact():
 @app.route('/employees')
 def employees():
     conn = get_db_connection()
-    cur = conn.cursor(dictionary=True)
+    cur = conn.cursor()
     cur.execute("SELECT * FROM employees")
     employees = cur.fetchall()
     cur.close()
